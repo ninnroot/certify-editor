@@ -14,6 +14,9 @@ enum componentEnum {
 interface CertificateStatesState {
     certificateStates: certicateType[],
     setCertificateStates: (certificateStates: certicateType[]) => void,
+
+    setSelectedComponentId: (id: string | number | null) => void,
+
     currentStateIndex: number,
     setCurrentStatendex: (index: number) => void,
     onComponentMove: (newAttrs: any, compType: componentEnum, componentIndex: number) => void,
@@ -29,6 +32,9 @@ const useCertificateStore = create(immer<CertificateStatesState>((set) => ({
     setCertificateStates: (certificateStates: certicateType[]) => set((state) => {
         // @ts-ignore
         state.certificateStates = certificateStates
+    }),
+    setSelectedComponentId: (id: string | number | null) => set((state) => {
+        state.certificateStates[state.currentStateIndex].selectedComponentId = id
     }),
     currentStateIndex: 0,
     setCurrentStatendex: (index: number) => set((state) => {
@@ -46,8 +52,12 @@ const useCertificateStore = create(immer<CertificateStatesState>((set) => ({
             //@ts-ignore
             draftState.components.push(component)
         })
+
         state.certificateStates.splice(state.currentStateIndex + 1, 0, nextState)
         state.currentStateIndex += 1
     })
 
 })))
+
+
+export default useCertificateStore

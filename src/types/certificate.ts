@@ -39,7 +39,7 @@ export type componentType = {
 }
 
 export type certicateType = {
-    backgroundImage: string,
+
     components: componentType[],
     selectedComponentId: null | number | string
 }
